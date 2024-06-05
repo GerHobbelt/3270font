@@ -8,3 +8,4 @@ gftools
 ipdb
 isort
 pip-chill
+pillow

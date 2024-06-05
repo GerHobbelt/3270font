@@ -1,4 +1,4 @@
-.PHONY: clean help all font test fbchecks upload sample cask
+.PHONY: clean help all font test fbchecks upload sample cask all-samples
 .DEFAULT_GOAL := help
 
 SHELL = /bin/sh
@@ -39,6 +39,8 @@ font: 3270_HQ.sfd fonts-3270.metainfo.xml ## Generates the font files from the S
 	@cp fonts-3270.metainfo.xml ${BUILD_DIR}
 
 sample: font build/3270_sample.gif
+
+all-samples: zip build/3270_sample.gif build/urxvt.png build/terminator.png build/xterm.png build/konsole.png build/gnome-terminal.png
 
 build/3270_sample.gif:
 	@./generate_sample_image.py
@@ -136,7 +138,7 @@ test: zip ttftest ## Runs more extensive tests
 fulltest: test fbchecks ## Runs the full set of tests
 	@zip -T ${BUILD_DIR}/3270_fonts_*.zip
 
-upload: zip build/3270_sample.gif build/urxvt.png build/terminator.png build/xterm.png build/konsole.png build/gnome-terminal.png ## Uploads the generated .zip and sample files to S3
+upload: zip all-samples ## Uploads the generated .zip and sample files to S3
 	@aws s3 cp ${BUILD_DIR}/3270_fonts_$(shell \
 		git rev-parse --short HEAD).zip \
 		s3://3270font/ \
