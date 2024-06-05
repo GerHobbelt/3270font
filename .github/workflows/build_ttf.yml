@@ -31,9 +31,9 @@ jobs:
         echo "Check that the helper script add-apt-repository is installed"
         sudo apt-get install software-properties-common
         echo "Add the FontForge PPA (which will also add the authentication key)"
-        sudo add-apt-repository ppa:fontforge/fontforge
+        #sudo add-apt-repository ppa:fontforge/fontforge
         echo "Update the software list to include packages from the PPA"
-        sudo apt-get update
+        #sudo apt-get update
         echo "Install FontForge"
         sudo apt-get install fontforge
     - run: ./build_ttf.sh
