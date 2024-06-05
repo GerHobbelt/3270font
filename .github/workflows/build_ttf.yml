@@ -36,6 +36,7 @@ jobs:
         #sudo apt-get update
         echo "Install FontForge"
         sudo apt-get install fontforge
+        pip3 install pillow
     - run: make all zip
     - run: echo "hash=$(git rev-parse --short $GITHUB_SHA)" >> $GITHUB_ENV
     - name: "Offer upload artifact (fonts ZIP file) for download"
