@@ -39,7 +39,8 @@ jobs:
         echo "Install required python packages"
         pip3 install -r requirements.txt
         sudo apt install rxvt-unicode
-    - run: make all zip all-samples
+    # make all zip all-samples   -- all-samples fails on the github CI due to "urxvt: can't open display :0, aborting"
+    - run: make all zip
     - run: echo "hash=$(git rev-parse --short $GITHUB_SHA)" >> $GITHUB_ENV
     - name: "Offer upload artifact (fonts ZIP file) for download"
       uses: actions/upload-artifact@main
